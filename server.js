@@ -281,12 +281,15 @@ app.get('/api/stats', async (req, res) => {
 });
 
 // Serve frontend
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
+ // Serve frontend static files from the exact same directory
+app.use(express.static(__dirname));
 
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`\n🚀 Server running on http://localhost:${PORT}`);
-})
+// Point all routes to index.html
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'), (err) => {
+        if (err) {
+            console.error("❌ File Error:", err);
+            res.status(500).send("MITS Bank Error: Could not load index.html");
+        }
+    });
+});
