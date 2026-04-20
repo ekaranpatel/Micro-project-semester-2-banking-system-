@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = 'http://localhost:3000/api';
+ const API_BASE_URL = '/api';
 
 // Helper function for API calls
 async function apiCall(endpoint, method = 'GET', data = null) {
