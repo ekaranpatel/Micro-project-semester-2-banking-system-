@@ -279,7 +279,13 @@ app.get('/api/stats', async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 });
+// ================= START SERVER =================
+const PORT = process.env.PORT || 3000;
 
+// Adding '0.0.0.0' forces the server to open to the public internet for Render
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`\n🚀 MITS Bank Server running on port ${PORT}`);
+});
 // Serve frontend
  // Serve frontend static files from the exact same directory
 app.use(express.static(__dirname));
